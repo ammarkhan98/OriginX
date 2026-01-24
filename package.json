@@ -1,0 +1,56 @@
+{
+  "name": "originx-vpn",
+  "version": "1.0.0",
+  "description": "Cross-platform VPN application built with Electron and OpenVPN",
+  "main": "dist/main.js",
+  "preload": "dist/preload.js",
+  "homepage": "./",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently \"npm run dev-react\" \"wait-on http://localhost:3000 && electron .\"",
+    "dev-react": "react-scripts start",
+    "build": "react-scripts build",
+    "build-electron": "tsc src/main.ts --outDir dist && tsc src/preload.ts --outDir dist",
+    "pack": "npm run build-electron && electron-builder --dir",
+    "dist": "npm run build-electron && npm run build && electron-builder",
+    "test": "react-scripts test"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "electron": "^27.0.0",
+    "electron-builder": "^24.0.0",
+    "electron-is-dev": "^2.0.0",
+    "typescript": "^4.9.0",
+    "concurrently": "^8.0.0",
+    "wait-on": "^7.0.0"
+  },
+  "build": {
+    "appId": "com.originx.vpn",
+    "productName": "OriginX VPN",
+    "files": [
+      "dist",
+      "build",
+      "node_modules"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "mac": {
+      "target": ["dmg", "zip"],
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": ["nsis", "portable"],
+      "certificateFile": null
+    }
+  }
+}

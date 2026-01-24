@@ -1,0 +1,222 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.status-card {
+  background: linear-gradient(135deg, #1a3a3a 0%, #0f2a2a 100%);
+  border: 1px solid #00d4ff;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ff3333;
+  animation: pulse 2s infinite;
+}
+
+.indicator.connected {
+  background: #00ff88;
+  animation: pulse-connected 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes pulse-connected {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+  }
+}
+
+.status-text {
+  font-size: 24px;
+  font-weight: 600;
+  color: #00d4ff;
+}
+
+.current-server {
+  margin-bottom: 30px;
+}
+
+.server-info {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.server-info .label {
+  color: #888;
+  margin-right: 10px;
+}
+
+.server-info .value {
+  color: #00ff88;
+  font-weight: 600;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 12px 40px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+  color: #000;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
+  color: #fff;
+}
+
+.btn-danger:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 51, 51, 0.3);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #00d4ff;
+}
+
+.servers-section h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.server-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+}
+
+.server-item {
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.server-item:hover {
+  border-color: #00d4ff;
+  background: #252525;
+}
+
+.server-item.selected {
+  border-color: #00d4ff;
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.server-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.server-name {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.server-location {
+  font-size: 12px;
+  color: #888;
+}
+
+.server-stats {
+  display: flex;
+  gap: 20px;
+  font-size: 12px;
+}
+
+.server-stats .stat {
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    gap: 20px;
+  }
+
+  .status-card {
+    padding: 20px;
+  }
+
+  .server-list {
+    grid-template-columns: 1fr;
+  }
+}

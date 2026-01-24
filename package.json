@@ -11,7 +11,7 @@
     "dev": "concurrently \"npm run dev-react\" \"wait-on http://localhost:3000 && electron .\"",
     "dev-react": "react-scripts start",
     "build": "react-scripts build",
-    "build-electron": "tsc src/main.ts --outDir dist && tsc src/preload.ts --outDir dist",
+    "build-electron": "tsc",
     "pack": "npm run build-electron && electron-builder --dir",
     "dist": "npm run build-electron && npm run build && electron-builder",
     "test": "react-scripts test"

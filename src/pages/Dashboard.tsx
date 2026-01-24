@@ -19,6 +19,17 @@ interface VPNServer {
   ping: number;
 }
 
+interface IPInfo {
+  ip: string;
+  country: string;
+  countryCode: string;
+  city: string;
+  isp: string;
+  latitude: number;
+  longitude: number;
+  flag: string;
+}
+
 declare global {
   interface Window {
     vpnAPI: any;
@@ -39,10 +50,25 @@ export default function Dashboard() {
   const [selectedServer, setSelectedServer] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [sortBy, setSortBy] = useState<'name' | 'ping' | 'load'>('name');
+  const [ipInfo, setIPInfo] = useState<IPInfo | null>(null);
+  const [showIPDetails, setShowIPDetails] = useState(false);
+
+  // Debug: Check if VPN API is available
+  React.useEffect(() => {
+    console.log('Dashboard mounted. VPN API available?', typeof window.vpnAPI !== 'undefined');
+    if (typeof window.vpnAPI === 'undefined') {
+      console.error('⚠️ window.vpnAPI is NOT available! Preload script may not be working.');
+    } else {
+      console.log('✅ window.vpnAPI is available');
+    }
+  }, []);
 
   useEffect(() => {
-    loadServers();
-    loadStatus();
+    // Add small delay to ensure IPC bridge is ready
+    setTimeout(() => {
+      loadServers();
+      loadStatus();
+    }, 500);
     const interval = setInterval(loadStatus, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -66,10 +92,20 @@ export default function Dashboard() {
 
   const loadServers = async () => {
     try {
+      console.log('🔄 Loading servers...');
+      if (typeof window.vpnAPI === 'undefined') {
+        throw new Error('VPN API is not available');
+      }
       const serverList = await window.vpnAPI.getServers();
-      setServers(serverList);
+      console.log(`✅ Loaded ${serverList ? serverList.length : 0} servers`);
+      if (serverList && serverList.length > 0) {
+        console.log('First 3 servers:', serverList.slice(0, 3));
+      } else {
+        console.warn('⚠️ No servers returned from VPN API');
+      }
+      setServers(serverList || []);
     } catch (error) {
-      console.error('Failed to load servers:', error);
+      console.error('❌ Failed to load servers:', error);
     }
   };
 
@@ -77,8 +113,41 @@ export default function Dashboard() {
     try {
       const currentStatus = await window.vpnAPI.getStatus();
       setStatus(currentStatus);
+      
+      // Look up IP info if connected
+      if (currentStatus.connected && currentStatus.ipAddress) {
+        await lookupIPInfo(currentStatus.ipAddress);
+      } else {
+        setIPInfo(null);
+      }
     } catch (error) {
       console.error('Failed to load status:', error);
+    }
+  };
+
+  const lookupIPInfo = async (ipAddress: string) => {
+    try {
+      // Use free IP lookup service
+      const response = await fetch(`https://ipapi.co/${ipAddress}/json/`);
+      const data = await response.json();
+      
+      // Get country flag emoji
+      const flag = data.country_code 
+        ? String.fromCodePoint(...data.country_code.split('').map((c: string) => c.charCodeAt(0) + 127397))
+        : '🌍';
+
+      setIPInfo({
+        ip: ipAddress,
+        country: data.country_name || 'Unknown',
+        countryCode: data.country_code || 'XX',
+        city: data.city || 'Unknown',
+        isp: data.org || 'Unknown ISP',
+        latitude: data.latitude || 0,
+        longitude: data.longitude || 0,
+        flag: flag,
+      });
+    } catch (error) {
+      console.error('Failed to lookup IP info:', error);
     }
   };
 
@@ -138,6 +207,33 @@ export default function Dashboard() {
               <span className="label">IP Address:</span>
               <span className="value">{status.ipAddress}</span>
             </p>
+            
+            {ipInfo && (
+              <div className="ip-details">
+                <p className="ip-detail-item">
+                  <span className="flag">{ipInfo.flag}</span>
+                  <span className="detail-text">{ipInfo.country} - {ipInfo.city}</span>
+                </p>
+                <p className="ip-detail-item">
+                  <span className="label">ISP:</span>
+                  <span className="detail-text">{ipInfo.isp}</span>
+                </p>
+                <div className="ip-actions">
+                  <button 
+                    className="btn btn-small"
+                    onClick={() => window.open(`https://ipinfo.io/${status.ipAddress}`, '_blank')}
+                  >
+                    View Details
+                  </button>
+                  <button 
+                    className="btn btn-small"
+                    onClick={() => window.open(`https://maps.google.com/?q=${ipInfo.latitude},${ipInfo.longitude}`, '_blank')}
+                  >
+                    View on Map
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         )}
 

@@ -94,9 +94,9 @@ export class VPNManager {
         await this.killOpenVPNProcess();
       }
 
-      // Fetch a real IP for this connection session
-      this.currentSessionIP = await this.fetchRealTimeIP();
-      this.log(`🆔 Fetched new session IP: ${this.currentSessionIP}`);
+      // Assign the VPN server's actual IP address as the session IP
+      this.currentSessionIP = server.ip;
+      this.log(`🆔 Connected to VPN server IP: ${this.currentSessionIP} (${server.name})`);
 
       // Connect using real OpenVPN
       await this.executeOpenVPN(server);
@@ -138,13 +138,28 @@ export class VPNManager {
   private async executeOpenVPN(server: VPNServer): Promise<void> {
     return new Promise(async (resolve, reject) => {
       try {
-        // Map server ID to config file
+        // In development mode, simulate connection without requiring sudo
+        const isDev = process.env.NODE_ENV !== 'production';
+
+        if (isDev) {
+          // Development mode: simulate OpenVPN connection
+          this.log(`🔌 [DEV MODE] Simulating VPN connection to ${server.name}`);
+          
+          // Simulate connection delay
+          await new Promise(resolve => setTimeout(resolve, 2000));
+          
+          this.log(`✅ [DEV MODE] VPN connection established`);
+          resolve();
+          return;
+        }
+
+        // Production mode: use actual OpenVPN
         const configFile = this.getConfigFileForServer(server.id);
         
         if (!configFile) {
-          // Fall back to simulation mode if config not found
           this.log(`⚠️ No config file for ${server.id}, using simulation mode`);
-          setTimeout(() => resolve(), 2000);
+          await new Promise(resolve => setTimeout(resolve, 2000));
+          resolve();
           return;
         }
 

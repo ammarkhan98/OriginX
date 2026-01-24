@@ -34,8 +34,11 @@ export default function Dashboard() {
   });
 
   const [servers, setServers] = useState<VPNServer[]>([]);
+  const [filteredServers, setFilteredServers] = useState<VPNServer[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selectedServer, setSelectedServer] = useState<string>('us-east-1');
+  const [selectedServer, setSelectedServer] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [sortBy, setSortBy] = useState<'name' | 'ping' | 'load'>('name');
 
   useEffect(() => {
     loadServers();
@@ -43,6 +46,23 @@ export default function Dashboard() {
     const interval = setInterval(loadStatus, 5000);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    // Filter and sort servers based on search term and sort option
+    let filtered = servers.filter((server) =>
+      server.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      server.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      server.country.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    filtered.sort((a, b) => {
+      if (sortBy === 'ping') return a.ping - b.ping;
+      if (sortBy === 'load') return a.load - b.load;
+      return a.name.localeCompare(b.name);
+    });
+
+    setFilteredServers(filtered);
+  }, [servers, searchTerm, sortBy]);
 
   const loadServers = async () => {
     try {
@@ -63,6 +83,10 @@ export default function Dashboard() {
   };
 
   const handleConnect = async () => {
+    if (!selectedServer) {
+      alert('Please select a server');
+      return;
+    }
     setLoading(true);
     try {
       const result = await window.vpnAPI.connect(selectedServer);
@@ -155,23 +179,52 @@ export default function Dashboard() {
 
       <div className="servers-section">
         <h2>Select a Server</h2>
+        
+        <div className="servers-controls">
+          <div className="search-box">
+            <input
+              type="text"
+              placeholder="Search by country, city, or name..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          
+          <div className="sort-controls">
+            <label>Sort by:</label>
+            <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)}>
+              <option value="name">Name</option>
+              <option value="ping">Ping (Low to High)</option>
+              <option value="load">Load (Low to High)</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="server-info-bar">
+          {filteredServers.length} servers available
+        </div>
+
         <div className="server-list">
-          {servers.map((server) => (
-            <div
-              key={server.id}
-              className={`server-item ${selectedServer === server.id ? 'selected' : ''}`}
-              onClick={() => setSelectedServer(server.id)}
-            >
-              <div className="server-header">
-                <span className="server-name">{server.name}</span>
-                <span className="server-location">{server.city}, {server.country}</span>
+          {filteredServers.length === 0 ? (
+            <div className="no-servers">No servers match your search</div>
+          ) : (
+            filteredServers.map((server) => (
+              <div
+                key={server.id}
+                className={`server-item ${selectedServer === server.id ? 'selected' : ''}`}
+                onClick={() => setSelectedServer(server.id)}
+              >
+                <div className="server-header">
+                  <span className="server-name">{server.name}</span>
+                  <span className="server-location">{server.city}, {server.country}</span>
+                </div>
+                <div className="server-stats">
+                  <span className="stat">Load: {server.load}%</span>
+                  <span className="stat">Ping: {server.ping}ms</span>
+                </div>
               </div>
-              <div className="server-stats">
-                <span className="stat">Load: {server.load}%</span>
-                <span className="stat">Ping: {server.ping}ms</span>
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>

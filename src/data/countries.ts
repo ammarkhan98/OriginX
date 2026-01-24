@@ -1,0 +1,110 @@
+export interface Country {
+  id: string;
+  name: string;
+  countryCode: string;
+  city: string;
+  ip: string;
+}
+
+export const COUNTRIES_DATA: Country[] = [
+  // North America
+  { id: 'us-ny-1', name: 'United States - New York', countryCode: 'US', city: 'New York', ip: '1.2.3.4' },
+  { id: 'us-la-1', name: 'United States - Los Angeles', countryCode: 'US', city: 'Los Angeles', ip: '5.6.7.8' },
+  { id: 'us-chicago-1', name: 'United States - Chicago', countryCode: 'US', city: 'Chicago', ip: '9.10.11.12' },
+  { id: 'us-denver-1', name: 'United States - Denver', countryCode: 'US', city: 'Denver', ip: '13.14.15.16' },
+  { id: 'us-seattle-1', name: 'United States - Seattle', countryCode: 'US', city: 'Seattle', ip: '17.18.19.20' },
+  { id: 'us-miami-1', name: 'United States - Miami', countryCode: 'US', city: 'Miami', ip: '21.22.23.24' },
+  { id: 'us-boston-1', name: 'United States - Boston', countryCode: 'US', city: 'Boston', ip: '25.26.27.28' },
+  { id: 'ca-toronto-1', name: 'Canada - Toronto', countryCode: 'CA', city: 'Toronto', ip: '29.30.31.32' },
+  { id: 'ca-vancouver-1', name: 'Canada - Vancouver', countryCode: 'CA', city: 'Vancouver', ip: '33.34.35.36' },
+  { id: 'ca-montreal-1', name: 'Canada - Montreal', countryCode: 'CA', city: 'Montreal', ip: '37.38.39.40' },
+  { id: 'mx-mexico-1', name: 'Mexico - Mexico City', countryCode: 'MX', city: 'Mexico City', ip: '41.42.43.44' },
+
+  // Europe
+  { id: 'uk-london-1', name: 'United Kingdom - London', countryCode: 'GB', city: 'London', ip: '45.46.47.48' },
+  { id: 'uk-manchester-1', name: 'United Kingdom - Manchester', countryCode: 'GB', city: 'Manchester', ip: '49.50.51.52' },
+  { id: 'de-berlin-1', name: 'Germany - Berlin', countryCode: 'DE', city: 'Berlin', ip: '53.54.55.56' },
+  { id: 'de-frankfurt-1', name: 'Germany - Frankfurt', countryCode: 'DE', city: 'Frankfurt', ip: '57.58.59.60' },
+  { id: 'de-munich-1', name: 'Germany - Munich', countryCode: 'DE', city: 'Munich', ip: '61.62.63.64' },
+  { id: 'fr-paris-1', name: 'France - Paris', countryCode: 'FR', city: 'Paris', ip: '65.66.67.68' },
+  { id: 'fr-marseille-1', name: 'France - Marseille', countryCode: 'FR', city: 'Marseille', ip: '69.70.71.72' },
+  { id: 'nl-amsterdam-1', name: 'Netherlands - Amsterdam', countryCode: 'NL', city: 'Amsterdam', ip: '73.74.75.76' },
+  { id: 'nl-rotterdam-1', name: 'Netherlands - Rotterdam', countryCode: 'NL', city: 'Rotterdam', ip: '77.78.79.80' },
+  { id: 'be-brussels-1', name: 'Belgium - Brussels', countryCode: 'BE', city: 'Brussels', ip: '81.82.83.84' },
+  { id: 'ch-zurich-1', name: 'Switzerland - Zurich', countryCode: 'CH', city: 'Zurich', ip: '85.86.87.88' },
+  { id: 'ch-geneva-1', name: 'Switzerland - Geneva', countryCode: 'CH', city: 'Geneva', ip: '89.90.91.92' },
+  { id: 'at-vienna-1', name: 'Austria - Vienna', countryCode: 'AT', city: 'Vienna', ip: '93.94.95.96' },
+  { id: 'se-stockholm-1', name: 'Sweden - Stockholm', countryCode: 'SE', city: 'Stockholm', ip: '97.98.99.100' },
+  { id: 'se-gothenburg-1', name: 'Sweden - Gothenburg', countryCode: 'SE', city: 'Gothenburg', ip: '101.102.103.104' },
+  { id: 'no-oslo-1', name: 'Norway - Oslo', countryCode: 'NO', city: 'Oslo', ip: '105.106.107.108' },
+  { id: 'no-bergen-1', name: 'Norway - Bergen', countryCode: 'NO', city: 'Bergen', ip: '109.110.111.112' },
+  { id: 'dk-copenhagen-1', name: 'Denmark - Copenhagen', countryCode: 'DK', city: 'Copenhagen', ip: '113.114.115.116' },
+  { id: 'fi-helsinki-1', name: 'Finland - Helsinki', countryCode: 'FI', city: 'Helsinki', ip: '117.118.119.120' },
+  { id: 'ie-dublin-1', name: 'Ireland - Dublin', countryCode: 'IE', city: 'Dublin', ip: '121.122.123.124' },
+  { id: 'es-madrid-1', name: 'Spain - Madrid', countryCode: 'ES', city: 'Madrid', ip: '125.126.127.128' },
+  { id: 'es-barcelona-1', name: 'Spain - Barcelona', countryCode: 'ES', city: 'Barcelona', ip: '129.130.131.132' },
+  { id: 'pt-lisbon-1', name: 'Portugal - Lisbon', countryCode: 'PT', city: 'Lisbon', ip: '133.134.135.136' },
+  { id: 'it-rome-1', name: 'Italy - Rome', countryCode: 'IT', city: 'Rome', ip: '137.138.139.140' },
+  { id: 'it-milan-1', name: 'Italy - Milan', countryCode: 'IT', city: 'Milan', ip: '141.142.143.144' },
+  { id: 'gr-athens-1', name: 'Greece - Athens', countryCode: 'GR', city: 'Athens', ip: '145.146.147.148' },
+  { id: 'pl-warsaw-1', name: 'Poland - Warsaw', countryCode: 'PL', city: 'Warsaw', ip: '149.150.151.152' },
+  { id: 'pl-krakow-1', name: 'Poland - Krakow', countryCode: 'PL', city: 'Krakow', ip: '153.154.155.156' },
+  { id: 'cz-prague-1', name: 'Czech Republic - Prague', countryCode: 'CZ', city: 'Prague', ip: '157.158.159.160' },
+  { id: 'hu-budapest-1', name: 'Hungary - Budapest', countryCode: 'HU', city: 'Budapest', ip: '161.162.163.164' },
+  { id: 'ro-bucharest-1', name: 'Romania - Bucharest', countryCode: 'RO', city: 'Bucharest', ip: '165.166.167.168' },
+  { id: 'ru-moscow-1', name: 'Russia - Moscow', countryCode: 'RU', city: 'Moscow', ip: '169.170.171.172' },
+  { id: 'ru-stpeter-1', name: 'Russia - St. Petersburg', countryCode: 'RU', city: 'St. Petersburg', ip: '173.174.175.176' },
+  { id: 'ua-kyiv-1', name: 'Ukraine - Kyiv', countryCode: 'UA', city: 'Kyiv', ip: '177.178.179.180' },
+
+  // Asia
+  { id: 'sg-singapore-1', name: 'Singapore', countryCode: 'SG', city: 'Singapore', ip: '181.182.183.184' },
+  { id: 'jp-tokyo-1', name: 'Japan - Tokyo', countryCode: 'JP', city: 'Tokyo', ip: '185.186.187.188' },
+  { id: 'jp-osaka-1', name: 'Japan - Osaka', countryCode: 'JP', city: 'Osaka', ip: '189.190.191.192' },
+  { id: 'hk-hongkong-1', name: 'Hong Kong', countryCode: 'HK', city: 'Hong Kong', ip: '193.194.195.196' },
+  { id: 'tw-taipei-1', name: 'Taiwan - Taipei', countryCode: 'TW', city: 'Taipei', ip: '197.198.199.200' },
+  { id: 'kr-seoul-1', name: 'South Korea - Seoul', countryCode: 'KR', city: 'Seoul', ip: '201.202.203.204' },
+  { id: 'kr-busan-1', name: 'South Korea - Busan', countryCode: 'KR', city: 'Busan', ip: '205.206.207.208' },
+  { id: 'cn-beijing-1', name: 'China - Beijing', countryCode: 'CN', city: 'Beijing', ip: '209.210.211.212' },
+  { id: 'cn-shanghai-1', name: 'China - Shanghai', countryCode: 'CN', city: 'Shanghai', ip: '213.214.215.216' },
+  { id: 'in-delhi-1', name: 'India - Delhi', countryCode: 'IN', city: 'Delhi', ip: '217.218.219.220' },
+  { id: 'in-mumbai-1', name: 'India - Mumbai', countryCode: 'IN', city: 'Mumbai', ip: '221.222.223.224' },
+  { id: 'in-bangalore-1', name: 'India - Bangalore', countryCode: 'IN', city: 'Bangalore', ip: '225.226.227.228' },
+  { id: 'th-bangkok-1', name: 'Thailand - Bangkok', countryCode: 'TH', city: 'Bangkok', ip: '229.230.231.232' },
+  { id: 'my-kuala-1', name: 'Malaysia - Kuala Lumpur', countryCode: 'MY', city: 'Kuala Lumpur', ip: '233.234.235.236' },
+  { id: 'id-jakarta-1', name: 'Indonesia - Jakarta', countryCode: 'ID', city: 'Jakarta', ip: '237.238.239.240' },
+  { id: 'ph-manila-1', name: 'Philippines - Manila', countryCode: 'PH', city: 'Manila', ip: '241.242.243.244' },
+  { id: 'vn-hanoi-1', name: 'Vietnam - Hanoi', countryCode: 'VN', city: 'Hanoi', ip: '245.246.247.248' },
+  { id: 'vn-saigon-1', name: 'Vietnam - Ho Chi Minh City', countryCode: 'VN', city: 'Ho Chi Minh City', ip: '249.250.251.252' },
+  { id: 'pk-karachi-1', name: 'Pakistan - Karachi', countryCode: 'PK', city: 'Karachi', ip: '1.2.3.253' },
+  { id: 'bd-dhaka-1', name: 'Bangladesh - Dhaka', countryCode: 'BD', city: 'Dhaka', ip: '2.3.4.5' },
+
+  // Middle East & Africa
+  { id: 'ae-dubai-1', name: 'UAE - Dubai', countryCode: 'AE', city: 'Dubai', ip: '6.7.8.9' },
+  { id: 'ae-abudhabi-1', name: 'UAE - Abu Dhabi', countryCode: 'AE', city: 'Abu Dhabi', ip: '10.11.12.13' },
+  { id: 'sa-riyadh-1', name: 'Saudi Arabia - Riyadh', countryCode: 'SA', city: 'Riyadh', ip: '14.15.16.17' },
+  { id: 'il-telaviv-1', name: 'Israel - Tel Aviv', countryCode: 'IL', city: 'Tel Aviv', ip: '18.19.20.21' },
+  { id: 'tr-istanbul-1', name: 'Turkey - Istanbul', countryCode: 'TR', city: 'Istanbul', ip: '22.23.24.25' },
+  { id: 'tr-ankara-1', name: 'Turkey - Ankara', countryCode: 'TR', city: 'Ankara', ip: '26.27.28.29' },
+  { id: 'eg-cairo-1', name: 'Egypt - Cairo', countryCode: 'EG', city: 'Cairo', ip: '30.31.32.33' },
+  { id: 'za-johannesburg-1', name: 'South Africa - Johannesburg', countryCode: 'ZA', city: 'Johannesburg', ip: '34.35.36.37' },
+  { id: 'za-capetown-1', name: 'South Africa - Cape Town', countryCode: 'ZA', city: 'Cape Town', ip: '38.39.40.41' },
+  { id: 'ng-lagos-1', name: 'Nigeria - Lagos', countryCode: 'NG', city: 'Lagos', ip: '42.43.44.45' },
+  { id: 'ke-nairobi-1', name: 'Kenya - Nairobi', countryCode: 'KE', city: 'Nairobi', ip: '46.47.48.49' },
+
+  // South America
+  { id: 'br-saopaulo-1', name: 'Brazil - São Paulo', countryCode: 'BR', city: 'São Paulo', ip: '50.51.52.53' },
+  { id: 'br-rio-1', name: 'Brazil - Rio de Janeiro', countryCode: 'BR', city: 'Rio de Janeiro', ip: '54.55.56.57' },
+  { id: 'br-brasilia-1', name: 'Brazil - Brasília', countryCode: 'BR', city: 'Brasília', ip: '58.59.60.61' },
+  { id: 'ar-buenos-1', name: 'Argentina - Buenos Aires', countryCode: 'AR', city: 'Buenos Aires', ip: '62.63.64.65' },
+  { id: 'cl-santiago-1', name: 'Chile - Santiago', countryCode: 'CL', city: 'Santiago', ip: '66.67.68.69' },
+  { id: 'co-bogota-1', name: 'Colombia - Bogotá', countryCode: 'CO', city: 'Bogotá', ip: '70.71.72.73' },
+  { id: 'pe-lima-1', name: 'Peru - Lima', countryCode: 'PE', city: 'Lima', ip: '74.75.76.77' },
+  { id: 've-caracas-1', name: 'Venezuela - Caracas', countryCode: 'VE', city: 'Caracas', ip: '78.79.80.81' },
+
+  // Oceania
+  { id: 'au-sydney-1', name: 'Australia - Sydney', countryCode: 'AU', city: 'Sydney', ip: '82.83.84.85' },
+  { id: 'au-melbourne-1', name: 'Australia - Melbourne', countryCode: 'AU', city: 'Melbourne', ip: '86.87.88.89' },
+  { id: 'au-brisbane-1', name: 'Australia - Brisbane', countryCode: 'AU', city: 'Brisbane', ip: '90.91.92.93' },
+  { id: 'nz-auckland-1', name: 'New Zealand - Auckland', countryCode: 'NZ', city: 'Auckland', ip: '94.95.96.97' },
+  { id: 'nz-wellington-1', name: 'New Zealand - Wellington', countryCode: 'NZ', city: 'Wellington', ip: '98.99.100.101' },
+];

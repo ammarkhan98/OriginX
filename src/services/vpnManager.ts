@@ -2,6 +2,7 @@ import { exec } from 'child_process';
 import { promisify } from 'util';
 import path from 'path';
 import fs from 'fs';
+import { COUNTRIES_DATA } from '../data/countries';
 
 const execPromise = promisify(exec);
 
@@ -148,59 +149,17 @@ export class VPNManager {
   }
 
   getServers(): VPNServer[] {
-    // Mock server list - in production, fetch from API
-    return [
-      {
-        id: 'us-east-1',
-        name: 'United States - East',
-        country: 'USA',
-        city: 'New York',
-        protocol: 'OpenVPN',
-        ip: '1.2.3.4',
-        load: 35,
-        ping: 15,
-      },
-      {
-        id: 'us-west-1',
-        name: 'United States - West',
-        country: 'USA',
-        city: 'Los Angeles',
-        protocol: 'OpenVPN',
-        ip: '5.6.7.8',
-        load: 42,
-        ping: 45,
-      },
-      {
-        id: 'eu-west-1',
-        name: 'Europe - West',
-        country: 'Netherlands',
-        city: 'Amsterdam',
-        protocol: 'OpenVPN',
-        ip: '9.10.11.12',
-        load: 28,
-        ping: 25,
-      },
-      {
-        id: 'eu-central-1',
-        name: 'Europe - Central',
-        country: 'Germany',
-        city: 'Frankfurt',
-        protocol: 'OpenVPN',
-        ip: '13.14.15.16',
-        load: 31,
-        ping: 30,
-      },
-      {
-        id: 'asia-1',
-        name: 'Asia - Singapore',
-        country: 'Singapore',
-        city: 'Singapore',
-        protocol: 'OpenVPN',
-        ip: '17.18.19.20',
-        load: 55,
-        ping: 120,
-      },
-    ];
+    // Return real server list from countries data
+    return COUNTRIES_DATA.map((country) => ({
+      id: country.id,
+      name: country.name,
+      country: country.countryCode,
+      city: country.city,
+      protocol: 'OpenVPN',
+      ip: country.ip,
+      load: Math.floor(Math.random() * 100),
+      ping: Math.floor(Math.random() * 150) + 10,
+    }));
   }
 
   updateSettings(newSettings: Partial<VPNSettings>): VPNSettings {

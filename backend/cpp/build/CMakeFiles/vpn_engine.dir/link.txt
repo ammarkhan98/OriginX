@@ -1,0 +1,2 @@
+/usr/bin/ar qc libvpn_engine.a CMakeFiles/vpn_engine.dir/src/vpn_engine.cpp.o CMakeFiles/vpn_engine.dir/src/ipc_bridge.cpp.o
+/usr/bin/ranlib libvpn_engine.a

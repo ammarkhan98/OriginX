@@ -1,0 +1,8 @@
+/Users/ammarkhan/Documents/VSCode Projects/OriginX/backend/cpp/build/CMakeFiles/vpn_engine.dir
+/Users/ammarkhan/Documents/VSCode Projects/OriginX/backend/cpp/build/CMakeFiles/vpn_engine_test.dir
+/Users/ammarkhan/Documents/VSCode Projects/OriginX/backend/cpp/build/CMakeFiles/edit_cache.dir
+/Users/ammarkhan/Documents/VSCode Projects/OriginX/backend/cpp/build/CMakeFiles/rebuild_cache.dir
+/Users/ammarkhan/Documents/VSCode Projects/OriginX/backend/cpp/build/CMakeFiles/list_install_components.dir
+/Users/ammarkhan/Documents/VSCode Projects/OriginX/backend/cpp/build/CMakeFiles/install.dir
+/Users/ammarkhan/Documents/VSCode Projects/OriginX/backend/cpp/build/CMakeFiles/install/local.dir
+/Users/ammarkhan/Documents/VSCode Projects/OriginX/backend/cpp/build/CMakeFiles/install/strip.dir

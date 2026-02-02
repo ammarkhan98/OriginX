@@ -1,36 +1,38 @@
 {
-  "name": "originx-vpn",
-  "version": "1.0.0",
-  "description": "Cross-platform VPN application built with Electron and OpenVPN",
+  "name": "originx-vpn-desktop",
+  "version": "2.0.0",
+  "description": "OriginX VPN Desktop Application - Electron + React Frontend with C++ Backend",
   "main": "dist/main.js",
   "preload": "dist/preload.js",
   "homepage": "./",
   "author": "",
   "license": "MIT",
   "scripts": {
-    "dev": "concurrently \"npm run dev-react\" \"wait-on http://localhost:3000 && electron .\"",
+    "dev": "concurrently \"npm run dev-react\" \"wait-on http://localhost:3000 && npm run dev-electron\"",
     "dev-react": "react-scripts start",
+    "dev-electron": "electron .",
     "build": "react-scripts build",
     "build-electron": "tsc",
+    "build-backend": "cd ../backend/cpp && mkdir -p build && cd build && cmake .. && make",
     "pack": "npm run build-electron && electron-builder --dir",
-    "dist": "npm run build-electron && npm run build && electron-builder",
+    "dist": "npm run build-backend && npm run build-electron && npm run build && electron-builder",
     "test": "react-scripts test"
   },
   "dependencies": {
-    "axios": "^1.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "^0.0.0"
+    "react-scripts": "5.0.1",
+    "axios": "^1.6.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "concurrently": "^8.0.0",
-    "electron": "^40.1.0",
-    "electron-builder": "^26.7.0",
+    "electron": "^27.0.0",
+    "electron-builder": "^24.0.0",
     "electron-is-dev": "^2.0.0",
     "typescript": "^4.9.0",
+    "concurrently": "^8.0.0",
     "wait-on": "^7.0.0"
   },
   "build": {
@@ -39,7 +41,8 @@
     "files": [
       "dist",
       "build",
-      "node_modules"
+      "node_modules",
+      "../backend/cpp/build/vpn_engine_backend"
     ],
     "directories": {
       "buildResources": "assets"
@@ -48,27 +51,16 @@
       "target": [
         "dmg",
         "zip"
-      ],
-      "category": "public.app-category.utilities"
+      ]
     },
     "win": {
       "target": [
         "nsis",
         "portable"
-      ],
-      "certificateFile": null
+      ]
     }
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

@@ -1,0 +1,10 @@
+{
+  "name": "originx-vpn-backend",
+  "version": "2.0.0",
+  "description": "OriginX VPN Backend - C++ Engine with IPC Bridge",
+  "scripts": {
+    "build": "mkdir -p build && cd build && cmake .. && make",
+    "rebuild": "rm -rf build && npm run build",
+    "clean": "rm -rf build"
+  }
+}

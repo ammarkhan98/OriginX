@@ -1,17 +1,16 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.20)
 project(OriginX-VPN-Engine)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Find required packages
+# Find required packages - nlohmann_json is header-only
 find_package(nlohmann_json 3.2.0 QUIET)
 
-# If nlohmann_json is not found, fetch it from GitHub
+# If nlohmann_json is not found, we'll use it as header-only via include directories
+# The header file will be included directly from include/
 if(NOT nlohmann_json_FOUND)
-    include(FetchContent)
-    FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz)
-    FetchContent_MakeAvailable(json)
+    message(STATUS "nlohmann_json package not found, using header-only mode")
 endif()
 
 # VPN Engine Library
@@ -25,7 +24,7 @@ target_include_directories(vpn_engine PUBLIC
 )
 
 target_link_libraries(vpn_engine
-    nlohmann_json::nlohmann_json
+    $<$<BOOL:${nlohmann_json_FOUND}>:nlohmann_json::nlohmann_json>
 )
 
 # Main executable for testing
@@ -35,7 +34,7 @@ add_executable(vpn_engine_test
 
 target_link_libraries(vpn_engine_test
     vpn_engine
-    nlohmann_json::nlohmann_json
+    $<$<BOOL:${nlohmann_json_FOUND}>:nlohmann_json::nlohmann_json>
 )
 
 # Platform-specific settings

@@ -2,8 +2,8 @@ import { exec, spawn } from 'child_process';
 import { promisify } from 'util';
 import path from 'path';
 import fs from 'fs';
-import { COUNTRIES_DATA } from '../data/countries';
 import axios from 'axios';
+import { serverConfigManager } from './ServerConfigManager';
 
 const execPromise = promisify(exec);
 
@@ -44,18 +44,33 @@ export class VPNManager {
   private logFile: string;
   private openvpnProcess: any = null;
   private connectionStartTime: number = 0;
+  private serversInitialized: boolean = false;
 
   constructor() {
     this.settings = {
       killSwitch: false,
       encryptionLevel: 'high',
       protocol: 'UDP',
-      dns: '8.8.8.8',
+      dns: process.env.VPN_DNS_PRIMARY || '8.8.8.8',
       autoConnect: false,
     };
 
     this.logFile = path.join(__dirname, '../logs/vpn.log');
     this.ensureLogFile();
+  }
+
+  /**
+   * Initialize the VPN Manager and load server configuration
+   */
+  async initialize(): Promise<void> {
+    try {
+      await serverConfigManager.loadServers();
+      this.serversInitialized = true;
+      this.log('✅ VPN Manager initialized with servers from configuration');
+    } catch (error) {
+      this.log(`⚠️  Failed to initialize servers: ${error}`);
+      this.serversInitialized = false;
+    }
   }
 
   private ensureLogFile() {
@@ -403,16 +418,18 @@ export class VPNManager {
   }
 
   getServers(): VPNServer[] {
-    // Return real server list from countries data
-    return COUNTRIES_DATA.map((country) => ({
-      id: country.id,
-      name: country.name,
-      country: country.countryCode,
-      city: country.city,
-      protocol: 'OpenVPN',
-      ip: country.ip,
-      load: Math.floor(Math.random() * 100),
-      ping: Math.floor(Math.random() * 150) + 10,
+    // Get servers from configuration manager
+    const configServers = serverConfigManager.getServers();
+    
+    return configServers.map((server) => ({
+      id: server.id,
+      name: server.name,
+      country: server.countryCode,
+      city: server.city,
+      protocol: server.protocol || 'OpenVPN',
+      ip: server.ip,
+      load: server.load,
+      ping: server.ping,
     }));
   }
 

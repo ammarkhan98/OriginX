@@ -1,8 +1,10 @@
-#include "include/vpn_engine.h"
-#include "include/ipc_bridge.h"
+#include "../include/vpn_engine.h"
+#include "../include/ipc_bridge.h"
 #include <iostream>
 #include <memory>
 #include <cstring>
+#include <thread>
+#include <chrono>
 
 // Placeholder HTTP server implementation
 // In production, consider using libraries like crow, pistache, or asio

@@ -1,0 +1,104 @@
+{
+  "servers": [
+    {
+      "id": "us-ny-1",
+      "name": "United States - New York",
+      "countryCode": "US",
+      "city": "New York",
+      "ip": "45.33.32.156",
+      "protocol": "UDP",
+      "load": 35,
+      "ping": 12
+    },
+    {
+      "id": "us-la-1",
+      "name": "United States - Los Angeles",
+      "countryCode": "US",
+      "city": "Los Angeles",
+      "ip": "167.99.182.125",
+      "protocol": "UDP",
+      "load": 42,
+      "ping": 28
+    },
+    {
+      "id": "us-chicago-1",
+      "name": "United States - Chicago",
+      "countryCode": "US",
+      "city": "Chicago",
+      "ip": "104.131.103.137",
+      "protocol": "UDP",
+      "load": 38,
+      "ping": 22
+    },
+    {
+      "id": "ca-toronto-1",
+      "name": "Canada - Toronto",
+      "countryCode": "CA",
+      "city": "Toronto",
+      "ip": "149.56.6.10",
+      "protocol": "UDP",
+      "load": 28,
+      "ping": 8
+    },
+    {
+      "id": "uk-london-1",
+      "name": "United Kingdom - London",
+      "countryCode": "UK",
+      "city": "London",
+      "ip": "185.2.75.150",
+      "protocol": "UDP",
+      "load": 45,
+      "ping": 85
+    },
+    {
+      "id": "fr-paris-1",
+      "name": "France - Paris",
+      "countryCode": "FR",
+      "city": "Paris",
+      "ip": "80.241.216.66",
+      "protocol": "UDP",
+      "load": 32,
+      "ping": 92
+    },
+    {
+      "id": "de-berlin-1",
+      "name": "Germany - Berlin",
+      "countryCode": "DE",
+      "city": "Berlin",
+      "ip": "185.10.127.50",
+      "protocol": "UDP",
+      "load": 40,
+      "ping": 95
+    },
+    {
+      "id": "au-sydney-1",
+      "name": "Australia - Sydney",
+      "countryCode": "AU",
+      "city": "Sydney",
+      "ip": "203.0.113.45",
+      "protocol": "UDP",
+      "load": 55,
+      "ping": 145
+    },
+    {
+      "id": "jp-tokyo-1",
+      "name": "Japan - Tokyo",
+      "countryCode": "JP",
+      "city": "Tokyo",
+      "ip": "210.168.0.1",
+      "protocol": "UDP",
+      "load": 48,
+      "ping": 125
+    },
+    {
+      "id": "sg-singapore-1",
+      "name": "Singapore - Singapore",
+      "countryCode": "SG",
+      "city": "Singapore",
+      "ip": "164.92.73.1",
+      "protocol": "UDP",
+      "load": 38,
+      "ping": 110
+    }
+  ]
+}

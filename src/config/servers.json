@@ -99,6 +99,89 @@
       "protocol": "UDP",
       "load": 38,
       "ping": 110
+    },
+    {
+      "id": "ma-casablanca-1",
+      "name": "Morocco - Casablanca",
+      "countryCode": "MA",
+      "city": "Casablanca",
+      "ip": "196.29.180.50",
+      "protocol": "UDP",
+      "load": 22,
+      "ping": 35
+    },
+    {
+      "id": "vpngate-za-1",
+      "name": "South Africa - Johannesburg (VPN Gate)",
+      "countryCode": "ZA",
+      "city": "Johannesburg",
+      "ip": "196.44.104.1",
+      "protocol": "UDP",
+      "load": 45,
+      "ping": 120,
+      "source": "vpngate"
+    },
+    {
+      "id": "vpngate-eg-1",
+      "name": "Egypt - Cairo (VPN Gate)",
+      "countryCode": "EG",
+      "city": "Cairo",
+      "ip": "197.45.51.1",
+      "protocol": "UDP",
+      "load": 38,
+      "ping": 85,
+      "source": "vpngate"
+    },
+    {
+      "id": "vpngate-ng-1",
+      "name": "Nigeria - Lagos (VPN Gate)",
+      "countryCode": "NG",
+      "city": "Lagos",
+      "ip": "197.216.0.1",
+      "protocol": "UDP",
+      "load": 50,
+      "ping": 110,
+      "source": "vpngate"
+    },
+    {
+      "id": "vpngate-br-1",
+      "name": "Brazil - São Paulo (VPN Gate)",
+      "countryCode": "BR",
+      "city": "São Paulo",
+      "ip": "187.0.0.1",
+      "protocol": "UDP",
+      "load": 42,
+      "ping": 95,
+      "source": "vpngate"
+    },
+    {
+      "id": "vpngate-mx-1",
+      "name": "Mexico - Mexico City (VPN Gate)",
+      "countryCode": "MX",
+      "city": "Mexico City",
+      "ip": "187.163.1.1",
+      "protocol": "UDP",
+      "load": 35,
+      "ping": 45,
+      "source": "vpngate"
+    },
+    {
+      "id": "vpngate-in-1",
+      "name": "India - Mumbai (VPN Gate)",
+      "countryCode": "IN",
+      "city": "Mumbai",
+      "ip": "103.111.1.1",
+      "protocol": "UDP",
+      "load": 55,
+      "ping": 75,
+      "source": "vpngate"
     }
-  ]
+  ],
+  "lastUpdated": "2026-02-03T20:21:52.769Z",
+  "sourceInfo": {
+    "dedicated": 11,
+    "vpngate": 7,
+    "total": 18,
+    "comment": "Combines 11 dedicated placeholder servers + 7 free public VPN Gate servers (Africa, Brazil, Mexico, India)"
+  }
 }
